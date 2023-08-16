@@ -2,9 +2,11 @@
 "use client"
 import Login from '@/components/Login'
 import SignUp from '@/components/SignUp'
-import { StreamChat } from 'stream-chat';
+import { StreamChat } from 'stream-chat' 
+import { Chat } from 'stream-chat-react'
 import Cookies from "universal-cookie";
 import { useState } from 'react';
+import JoinGame from '@/components/JoinGame';
 
 
 export default function Home() {
@@ -49,9 +51,13 @@ export default function Home() {
       });
   }
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="page">
       {isAuth ? (
+        <Chat client={client}>
+          {/* Client içindeki user vs alabilmek için hook kullanıyorum */}
+        <JoinGame />
         <button onClick={logOut}>Log Out</button>
+        </Chat>
       ) : (
       <>
       <Login setIsAuth={setIsAuth} />
