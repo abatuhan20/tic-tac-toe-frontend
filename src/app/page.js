@@ -15,16 +15,27 @@ export default function Home() {
   
   const [isAuth, setIsAuth] = useState(false);
   const [userData, setUserData] = useState(null); // State to hold user data
-
+ 
   const handleSignUpSuccess = (userData) => {
       setUserData(userData); // Update user data in the state
       setIsAuth(true); // Auth status
   };
 
-  client.disconnectUser();
+  const logOut = () => {
+    cookies.remove("token");
+    cookies.remove("userID");
+    cookies.remove("firstName");
+    cookies.remove("lastName");
+    cookies.remove("hashedPassword");
+    cookies.remove("channelName");
+    cookies.remove("username");
+    client.disconnectUser();
+    setIsAuth(false);
+  }
+
 
   if (token) {
-    client.connectUser({
+    client?.connectUser({
       id: cookies.get("userID"),
       name: cookies.get("username"),
       firstName: cookies.get("firstName"),
@@ -34,12 +45,14 @@ export default function Home() {
     token
     ).then((userData) => {
         console.log(userData);
-        setIsAuth(true); 
+        setIsAuth(true);
       });
   }
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      {isAuth ? (<h1> Game Page </h1>) : (
+      {isAuth ? (
+        <button onClick={logOut}>Log Out</button>
+      ) : (
       <>
       <Login setIsAuth={setIsAuth} />
       <SignUp onSignUpSuccess={handleSignUpSuccess} />

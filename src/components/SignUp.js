@@ -10,7 +10,10 @@ const SignUp = ({ onSignUpSuccess }) => {
     const signUp = () => {
         Axios.post("http://localhost:3001/signup", user).then((res) => {
          const { token, userID, firstName, lastName, username, hashedPassword } = res.data;
-         
+         if(!username || !hashedPassword || !firstName || !lastName){
+            alert("You need to fill the form!");
+            return;
+         }
          cookies.set("token", token);
          cookies.set("userID", userID);
          cookies.set("username", username);

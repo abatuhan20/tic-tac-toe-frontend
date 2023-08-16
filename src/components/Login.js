@@ -11,11 +11,17 @@ const Login = ({ setIsAuth }) => {
     const cookies = new Cookies();
 
     const login = () => {
+      if (!username || !password) {
+        alert("Username and password are required!");
+        return; // Exit the function
+      } else{
       axios.post("http://localhost:3001/login",{
         username,
         password,
       }).then((res) => {
         const {firstName, lastName, username, token, userID} = res.data;
+        if (token === undefined) {return (alert("Incorrect username or password"))}
+        // Bu if satırı sayesinde undefined basmasını önledim
         cookies.set("token", token);
         cookies.set("userID", userID);
         cookies.set("username", username);
@@ -23,8 +29,11 @@ const Login = ({ setIsAuth }) => {
         cookies.set("lastName", lastName);
 
         setIsAuth(true);
+      }).catch((error) => {
+        console.log("Login Error:", error.response.data.message);
+        // Display an error message to the user, or handle the error as needed
       });
-
+    }
     }
 
   return (
