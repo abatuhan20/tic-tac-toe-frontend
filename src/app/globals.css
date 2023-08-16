@@ -7,6 +7,41 @@
   justify-content: center;
   align-items: center;
   background-color: rebeccapurple;
+  user-select: none;
+}
+
+.page h1 {
+  font-size: 3rem;
+  display: flex;
+  position: absolute;
+  margin-top: 3rem;
+  top: 0;
+}
+.page h2 {
+  color: red;
+  display: flex;
+  position: absolute;
+  margin-top: 6rem;
+  top: 0;
+}
+
+.container {
+  margin-top: 6rem;
+}
+
+.logOut {
+  background-color: black;
+  color: white;
+  position: absolute;
+  border: none;
+  top: 150px;
+  border-radius: 1rem;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.loading {
+  font-weight: bold;
 }
 
 body {
@@ -58,6 +93,7 @@ body {
 }
 
 .board {
+  margin-top: 4rem;
   width: 500px;
   height: 500px;
   background-color: rgb(252, 252, 252);
@@ -65,6 +101,14 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+@media (max-width:400px) {
+  .board {
+    width: 400px;
+    height: 400px;
+  }
+}
+/* EKRAN 400 PX ALTINA İNDİĞİNDE MOBİLE UYDURUYOR */
 
 .row {
   flex: 33%;
@@ -97,6 +141,9 @@ h4 {
 .joinGame {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
 }
 
 .joinGame input {
@@ -105,9 +152,14 @@ h4 {
   border-radius: 4px;
   width: 220px;
   height: 30px;
+  margin: 1rem;
 }
+
 .joinGame button {
-  padding: 10px;
+  background-color: black;
+  color: white;
+  display: flex;
+  padding: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   width: 220px;

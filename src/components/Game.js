@@ -13,7 +13,7 @@ const Game = ({channel}) => {
     // channel.state.watcher_count bağlantı sayısını trackliyor
     // Oyuncuların bağlanıp bağlanmadığına bu kısımda bakabiliyorum.
     if(!playersJoined) {
-        return <div>Waiting for other player to join...</div>
+        return <div className='loading'>Waiting for other player to join...</div>
     }
   return (
     <div className='gameContainer'>

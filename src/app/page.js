@@ -52,16 +52,20 @@ export default function Home() {
   }
   return (
     <main className="page">
+      <h1>TIC TAC TOE</h1>
+      <h2>MULTIPLAYER</h2>
       {isAuth ? (
         <Chat client={client}>
           {/* Client içindeki user vs alabilmek için hook kullanıyorum */}
         <JoinGame />
-        <button onClick={logOut}>Log Out</button>
+        <button className='logOut' onClick={logOut}>Log Out</button>
         </Chat>
       ) : (
       <>
+      <div className='container'>
       <Login setIsAuth={setIsAuth} />
       <SignUp onSignUpSuccess={handleSignUpSuccess} />
+      </div>
       </>
       )}
     </main>

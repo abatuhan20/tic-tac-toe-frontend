@@ -9,6 +9,16 @@ const Login = ({ setIsAuth }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const cookies = new Cookies();
+    const showPassword = () => {
+      const passEl = document.getElementById("passEl");
+      if("password" === passEl.getAttribute("type")) {
+        passEl.setAttribute("type", "text");
+      }
+      else {
+        passEl.setAttribute("type","password");
+      }
+      
+    }
 
     const login = () => {
       if (!username || !password) {
@@ -45,9 +55,10 @@ const Login = ({ setIsAuth }) => {
             setUsername(event.target.value);
         }}/> 
 
-        <input placeholder="Password" onChange={(event) => {
+        <input id='passEl' type='password' placeholder="Password" onChange={(event) => {
             setPassword(event.target.value);
         }}/>
+        <button className='showPass' id='showPass' onClick={showPassword}>Show Password</button>
 
         <button onClick={login}>Login</button>
 
