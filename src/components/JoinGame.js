@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import {useChatContext, Channel} from 'stream-chat-react'
 import Game from './Game';
+import CustomInput from './CustomInput';
 
 const JoinGame = () => {
   const [rivalUsername, setRivalUsername] = useState("");
@@ -25,8 +26,8 @@ const JoinGame = () => {
   return (
     <>
     {channel ? (
-      <Channel channel={channel}>
-      <Game channel={channel}/>
+      <Channel channel={channel} Input={CustomInput}>
+      <Game channel={channel} setChannel={setChannel}/>
       {/* Bağlanıp bağlanmadıklarını anlamak için */}
       </Channel>
       // Channel olarak oyunu dinlemesini istiyorum o yüzden wraplayıp prop veriyorum
