@@ -5,28 +5,30 @@ import Board from './Board'
 import { Window, MessageList, MessageInput } from 'stream-chat-react'
 import "./Chat.css";
 import { DM_Sans } from 'next/font/google'
-// CSS stream kütüphanesi içi componentlere vuruyo
+// CSS stream kütüphanesi ici componentlere vuruyo
 
 const Game = ({channel, setChannel}) => {
     const  [playersJoined, setPlayersJoined] = useState(channel.state.watcher_count === 2);
-    // user.watching.start user o sayfaya ne zaman bağlanırsa
-    // channel.on fonksiyonu 2 kişide de sayfanın yenilenmesini sağlıyor.
+    // user.watching.start user o sayfaya ne zaman baglanırsa
+    // channel.on fonksiyonu 2 kiside de sayfanin yenilenmesini sagliyor.
     const [result, setResult] = useState({ winner: "none", state: "none" });
-    
+   
     channel.on("user.watching.start", (event) => {
         setPlayersJoined(event.watcher_count === 2)
     });
-    // channel.state.watcher_count bağlantı sayısını trackliyor
-    // Oyuncuların bağlanıp bağlanmadığına bu kısımda bakabiliyorum.
+    // channel.state.watcher_count baglanti sayisini trackliyor
+    // Oyuncularin baglanip baglanmadigina bu kisimda bakabiliyorum.
     if(!playersJoined) {
         return <div className='loading'>Waiting for other player to join...</div>
     }
 
   return (
     <div className='gameContainer'>
+      
         <Board result={result} setResult={setResult} />
+        <div className='chatContainer'>
         <Window>
-          <MessageList 
+          <MessageList
           disableDateSeparator 
           closeReactionSelectorOnClick 
           messageActions={["react","delete"]}
@@ -34,6 +36,7 @@ const Game = ({channel, setChannel}) => {
           />
           <MessageInput noFiles/>
         </Window>
+        </div>
         <button id='leaveBtn'
         onClick={async () => {
           await channel.stopWatching();
@@ -43,8 +46,11 @@ const Game = ({channel, setChannel}) => {
         {" "}
         Leave Game
       </button>
-      {result.state === "won" && <div> {result.winner} Won The Game</div>}
-      {result.state === "tie" && <div> Game Tieds</div>}
+      {/* <button onClick={async () => {
+        await channel.disableSlowMode();
+      }}>Disable Slow Mode</button> */}
+      {result.state === "won" && <div className='result'> {result.winner} Won The Game</div>}
+      {result.state === "tie" && <div className='result'> Game Tieds</div>}
     </div>
   )
 }

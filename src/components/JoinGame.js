@@ -21,6 +21,7 @@ const JoinGame = () => {
 
     await newChannel.watch();
     setChannel(newChannel);
+    
     // Dinlemesi için
   }
   return (
